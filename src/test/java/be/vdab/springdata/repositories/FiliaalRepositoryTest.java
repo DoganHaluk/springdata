@@ -93,4 +93,7 @@ class FiliaalRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
                 .hasSize(countRowsInTableWhere(FILIALEN, "gemeente = 'Brussel'"))
                 .allSatisfy(filiaal -> assertThat(filiaal.getGemeente()).isEqualToIgnoringCase("Brussel"));
     }
+    @Test void findByOmzetGreaterThanEqual() {
+
+    }
 }
