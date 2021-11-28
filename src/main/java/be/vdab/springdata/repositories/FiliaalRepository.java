@@ -16,7 +16,9 @@ public interface FiliaalRepository extends JpaRepository<Filiaal, Long> {
 
     void deleteById(long id);
 
-    List<Filiaal> findByGemeente(String gemeente);
+    List<Filiaal> findByGemeenteOrderByNaam(String gemeente);
 
     List<Filiaal> findByOmzetGreaterThanEqual(BigDecimal vanaf);
+
+    int countByGemeente(String gemeente);
 }

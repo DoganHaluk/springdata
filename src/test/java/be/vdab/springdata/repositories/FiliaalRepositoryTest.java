@@ -88,12 +88,24 @@ class FiliaalRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
     }
 
     @Test
-    void findByGemeente() {
-        assertThat(repository.findByGemeente("Brussel"))
+    void findByGemeenteOrderByNaam() {
+        assertThat(repository.findByGemeenteOrderByNaam("Brussel"))
                 .hasSize(countRowsInTableWhere(FILIALEN, "gemeente = 'Brussel'"))
-                .allSatisfy(filiaal -> assertThat(filiaal.getGemeente()).isEqualToIgnoringCase("Brussel"));
+                .allSatisfy(filiaal -> assertThat(filiaal.getGemeente()).isEqualToIgnoringCase("Brussel"))
+                .extracting(Filiaal::getNaam)
+                .isSortedAccordingTo(String::compareToIgnoreCase);
     }
-    @Test void findByOmzetGreaterThanEqual() {
 
+    @Test
+    void findByOmzetGreaterThanEqual() {
+        var tweeduizend = BigDecimal.valueOf(2_000);
+        assertThat(repository.findByOmzetGreaterThanEqual(tweeduizend))
+                .hasSize(countRowsInTableWhere(FILIALEN, "omzet >= 2000"))
+                .allSatisfy(filiaal -> assertThat(filiaal.getOmzet()).isGreaterThanOrEqualTo(tweeduizend));
+    }
+
+    @Test
+    void countByGemeente() {
+        assertThat(repository.countByGemeente("Brussel")).isEqualTo(countRowsInTableWhere(FILIALEN, "gemeente = 'Brussel'"));
     }
 }
