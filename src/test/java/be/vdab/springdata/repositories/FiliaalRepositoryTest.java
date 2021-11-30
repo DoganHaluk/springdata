@@ -62,7 +62,8 @@ class FiliaalRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
         var idAlfa = idVanAlfa();
         var idBravo = idVanBravo();
         assertThat(repository.findAllById(Set.of(idVanAlfa(), idVanBravo())))
-                .extracting(Filiaal::getId).containsOnly(idAlfa, idBravo);
+                .extracting(Filiaal::getId)
+                .containsOnly(idAlfa, idBravo);
     }
 
     @Test
