@@ -10,7 +10,7 @@
     </named-query>
     <named-query name="Werknemer.findAantalWerknemersPerFamilienaam">
         <query>
-            select w.familienaam as familienaam,count(w) as aantal from Werknemer w group by w.familienaam
+            select w.familienaam as familienaam, count(w) as aantal from Werknemer w group by w.familienaam
         </query>
     </named-query>
 </entity-mappings>
